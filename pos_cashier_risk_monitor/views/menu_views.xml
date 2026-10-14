@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_pos_risk_root" name="Risk Monitoring"
+              parent="point_of_sale.menu_point_root" sequence="80"
+              groups="group_pos_risk_user"/>
+    <menuitem id="menu_pos_risk_cases" name="Risk Cases"
+              parent="menu_pos_risk_root" action="action_pos_risk_case"
+              sequence="10" groups="group_pos_risk_user"/>
+    <menuitem id="menu_pos_risk_reports" name="Reports"
+              parent="menu_pos_risk_root" action="action_pos_risk_case_report"
+              sequence="15" groups="group_pos_risk_user"/>
+    <menuitem id="menu_pos_risk_rules" name="Rules"
+              parent="menu_pos_risk_root" action="action_pos_risk_rule"
+              sequence="20" groups="group_pos_risk_admin"/>
+    <menuitem id="menu_pos_risk_baselines" name="Behavioural Baselines"
+              parent="menu_pos_risk_root" action="action_pos_cashier_baseline"
+              sequence="25" groups="group_pos_risk_user"/>
+    <menuitem id="menu_pos_risk_ml_models" name="ML Models"
+              parent="menu_pos_risk_root" action="action_pos_risk_ml_model"
+              sequence="27" groups="group_pos_risk_admin"/>
+    <menuitem id="menu_pos_risk_evaluation" name="Evaluation Runs"
+              parent="menu_pos_risk_root" action="action_pos_risk_evaluation"
+              sequence="28" groups="group_pos_risk_manager"/>
+    <menuitem id="menu_pos_risk_evaluation_scenarios" name="Evaluation Scenarios"
+              parent="menu_pos_risk_root" action="action_pos_risk_evaluation_scenario"
+              sequence="29" groups="group_pos_risk_manager"/>
+    <menuitem id="menu_pos_risk_configuration" name="Configuration"
+              parent="menu_pos_risk_root" action="action_pos_config_risk"
+              sequence="30" groups="group_pos_risk_admin"/>
+</odoo>

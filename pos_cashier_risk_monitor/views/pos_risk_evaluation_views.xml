@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_risk_evaluation_list" model="ir.ui.view">
+        <field name="name">pos.risk.evaluation.list</field>
+        <field name="model">pos.risk.evaluation</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="run_at"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <field name="scenario_count"/>
+                <field name="evaluated_count"/>
+                <field name="precision"/>
+                <field name="false_alerts_per_1000"/>
+                <field name="acceptance_rate" widget="percentage"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_pos_risk_evaluation_form" model="ir.ui.view">
+        <field name="name">pos.risk.evaluation.form</field>
+        <field name="model">pos.risk.evaluation</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_evaluate" type="object" string="Evaluate Scenarios" class="oe_highlight"/>
+                </header>
+                <sheet>
+                    <div class="oe_title"><h1><field name="name"/></h1></div>
+                    <group>
+                        <field name="company_id"/>
+                        <field name="run_at"/>
+                        <field name="notes"/>
+                    </group>
+                    <group string="Metrics">
+                        <field name="scenario_count"/>
+                        <field name="evaluated_count"/>
+                        <field name="true_positive"/>
+                        <field name="false_positive"/>
+                        <field name="false_negative"/>
+                        <field name="true_negative"/>
+                        <field name="precision"/>
+                        <field name="false_alerts_per_1000"/>
+                        <field name="acceptance_rate"/>
+                        <field name="total_exposure"/>
+                    </group>
+                    <notebook>
+                        <page string="Scenarios">
+                            <field name="scenario_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="code"/>
+                                    <field name="name"/>
+                                    <field name="category"/>
+                                    <field name="expected_outcome"/>
+                                    <field name="expected_level"/>
+                                    <field name="order_id"/>
+                                    <field name="predicted_alert"/>
+                                    <field name="predicted_level"/>
+                                    <field name="observed_score"/>
+                                    <field name="evaluated"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_pos_risk_evaluation_scenario_list" model="ir.ui.view">
+        <field name="name">pos.risk.evaluation.scenario.list</field>
+        <field name="model">pos.risk.evaluation.scenario</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="code"/>
+                <field name="name"/>
+                <field name="category"/>
+                <field name="expected_outcome"/>
+                <field name="expected_level"/>
+                <field name="order_id"/>
+                <field name="evaluated"/>
+            </list>
+        </field>
+    </record>
+    <record id="action_pos_risk_evaluation" model="ir.actions.act_window">
+        <field name="name">Evaluation Runs</field>
+        <field name="res_model">pos.risk.evaluation</field>
+        <field name="view_mode">list,form</field>
+    </record>
+    <record id="action_pos_risk_evaluation_scenario" model="ir.actions.act_window">
+        <field name="name">Evaluation Scenarios</field>
+        <field name="res_model">pos.risk.evaluation.scenario</field>
+        <field name="view_mode">list</field>
+    </record>
+</odoo>

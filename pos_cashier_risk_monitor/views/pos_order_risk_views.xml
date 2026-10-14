@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_order_risk_form" model="ir.ui.view">
+        <field name="name">pos.order.risk.form</field>
+        <field name="model">pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/field[@name='state'][1]" position="before">
+                <button name="action_risk_analyze" type="object" string="Analyze Risk"
+                        class="btn-secondary" groups="pos_cashier_risk_monitor.group_pos_risk_admin"
+                        invisible="state not in ['paid', 'done'] or risk_analysis_state in ['processing', 'completed']"/>
+                <button name="action_risk_retry_analysis" type="object" string="Retry Risk Analysis"
+                        class="btn-secondary" groups="pos_cashier_risk_monitor.group_pos_risk_admin"
+                        invisible="risk_analysis_state != 'failed'"/>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_risk_cases" type="object" class="oe_stat_button"
+                        icon="fa-shield" groups="pos_cashier_risk_monitor.group_pos_risk_user"
+                        invisible="risk_case_count == 0">
+                    <field name="risk_case_count" widget="statinfo" string="Risk Cases"/>
+                </button>
+            </xpath>
+            <xpath expr="//page[@name='extra']//group[@name='other_information']" position="inside">
+                <field name="risk_analysis_state"/>
+                <field name="risk_score"/>
+                <field name="risk_level"/>
+                <field name="risk_analyzed_at"/>
+                <field name="risk_analysis_error"
+                       groups="pos_cashier_risk_monitor.group_pos_risk_admin"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

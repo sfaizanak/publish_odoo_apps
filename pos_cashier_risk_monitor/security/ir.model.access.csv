@@ -1,0 +1,26 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_pos_risk_rule_user,pos.risk.rule user,model_pos_risk_rule,group_pos_risk_user,1,0,0,0
+access_pos_risk_rule_manager,pos.risk.rule manager,model_pos_risk_rule,group_pos_risk_manager,1,0,0,0
+access_pos_risk_rule_admin,pos.risk.rule administrator,model_pos_risk_rule,group_pos_risk_admin,1,1,1,1
+access_pos_risk_case_user,pos.risk.case user,model_pos_risk_case,group_pos_risk_user,1,0,0,0
+access_pos_risk_case_manager,pos.risk.case manager,model_pos_risk_case,group_pos_risk_manager,1,1,0,0
+access_pos_risk_case_admin,pos.risk.case administrator,model_pos_risk_case,group_pos_risk_admin,1,1,1,1
+access_pos_risk_case_reason_user,pos.risk.case.reason user,model_pos_risk_case_reason,group_pos_risk_user,1,0,0,0
+access_pos_risk_case_reason_manager,pos.risk.case.reason manager,model_pos_risk_case_reason,group_pos_risk_manager,1,1,0,0
+access_pos_risk_case_reason_admin,pos.risk.case.reason administrator,model_pos_risk_case_reason,group_pos_risk_admin,1,1,1,1
+access_pos_risk_event_user,pos.risk.event monitoring user,model_pos_risk_event,group_pos_risk_user,1,0,0,0
+access_pos_risk_event_manager,pos.risk.event manager,model_pos_risk_event,group_pos_risk_manager,1,0,0,0
+access_pos_risk_event_admin,pos.risk.event administrator,model_pos_risk_event,group_pos_risk_admin,1,1,1,1
+access_pos_risk_event_pos_user,pos.risk.event POS user create,model_pos_risk_event,point_of_sale.group_pos_user,0,0,1,0
+access_pos_cashier_baseline_user,pos.cashier.baseline user,model_pos_cashier_baseline,group_pos_risk_user,1,0,0,0
+access_pos_cashier_baseline_manager,pos.cashier.baseline manager,model_pos_cashier_baseline,group_pos_risk_manager,1,0,0,0
+access_pos_cashier_baseline_admin,pos.cashier.baseline administrator,model_pos_cashier_baseline,group_pos_risk_admin,1,1,1,1
+access_pos_risk_ml_model_user,pos.risk.ml.model user,model_pos_risk_ml_model,group_pos_risk_user,1,0,0,0
+access_pos_risk_ml_model_manager,pos.risk.ml.model manager,model_pos_risk_ml_model,group_pos_risk_manager,1,0,0,0
+access_pos_risk_ml_model_admin,pos.risk.ml.model administrator,model_pos_risk_ml_model,group_pos_risk_admin,1,1,1,1
+access_pos_risk_evaluation_user,pos.risk.evaluation user,model_pos_risk_evaluation,group_pos_risk_user,1,0,0,0
+access_pos_risk_evaluation_manager,pos.risk.evaluation manager,model_pos_risk_evaluation,group_pos_risk_manager,1,1,1,0
+access_pos_risk_evaluation_admin,pos.risk.evaluation administrator,model_pos_risk_evaluation,group_pos_risk_admin,1,1,1,1
+access_pos_risk_evaluation_scenario_user,pos.risk.evaluation.scenario user,model_pos_risk_evaluation_scenario,group_pos_risk_user,1,0,0,0
+access_pos_risk_evaluation_scenario_manager,pos.risk.evaluation.scenario manager,model_pos_risk_evaluation_scenario,group_pos_risk_manager,1,1,1,0
+access_pos_risk_evaluation_scenario_admin,pos.risk.evaluation.scenario administrator,model_pos_risk_evaluation_scenario,group_pos_risk_admin,1,1,1,1

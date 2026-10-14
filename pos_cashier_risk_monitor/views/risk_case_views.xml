@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_pos_risk_case_list" model="ir.ui.view">
+            <field name="name">pos.risk.case.list</field>
+            <field name="model">pos.risk.case</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="detected_at"/>
+                    <field name="cashier_id"/>
+                    <field name="config_id"/>
+                    <field name="order_id"/>
+                    <field name="category"/>
+                    <field name="classification"/>
+                    <field name="financial_exposure"/>
+                    <field name="risk_score"/>
+                    <field name="risk_level"/>
+                    <field name="state"/>
+                    <field name="review_outcome"/>
+                    <field name="config_id"/>
+                    <field name="assigned_user_id"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_pos_risk_case_kanban" model="ir.ui.view">
+            <field name="name">pos.risk.case.kanban</field>
+            <field name="model">pos.risk.case</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="state">
+                    <field name="name"/>
+                    <field name="risk_score"/>
+                    <field name="risk_level"/>
+                    <field name="classification"/>
+                    <field name="cashier_id"/>
+                    <field name="assigned_user_id"/>
+                    <templates>
+                        <t t-name="card">
+                            <div class="oe_kanban_global_click">
+                                <strong>
+                                    <field name="name"/>
+                                </strong>
+                                <div>
+                                    <field name="risk_level"/>
+                                    -
+                                    <field name="risk_score"/>
+                                </div>
+                                <div>
+                                    <field name="classification"/>
+                                </div>
+                                <div>
+                                    <field name="cashier_id"/>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
+        <record id="view_pos_risk_case_search" model="ir.ui.view">
+            <field name="name">pos.risk.case.search</field>
+            <field name="model">pos.risk.case</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="cashier_id"/>
+                    <field name="assigned_user_id"/>
+                    <field name="category"/>
+                    <field name="classification"/>
+                    <field name="risk_level"/>
+                    <field name="state"/>
+                    <filter name="my_cases" string="My Assigned Cases" domain="[('assigned_user_id', '=', uid)]"/>
+                    <filter name="open" string="New and Under Review"
+                            domain="[('state', 'in', ['new', 'under_review'])]"/>
+                    <filter name="high" string="High and Critical"
+                            domain="[('risk_level', 'in', ['high', 'critical'])]"/>
+                    <filter name="date_filter" string="Detection Date" date="detected_at"/>
+                    <separator/>
+                    <group>
+                        <filter name="state_group" string="State" context="{'group_by': 'state'}"/>
+                        <filter name="category_group" string="Category" context="{'group_by': 'category'}"/>
+                        <filter name="cashier_group" string="Cashier" context="{'group_by': 'cashier_id'}"/>
+                        <filter name="config_group" string="Point of Sale" context="{'group_by': 'config_id'}"/>
+                        <filter name="risk_level_group" string="Risk Level" context="{'group_by': 'risk_level'}"/>
+                        <filter name="outcome_group" string="Review Outcome" context="{'group_by': 'review_outcome'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_pos_risk_case_graph" model="ir.ui.view">
+            <field name="name">pos.risk.case.graph</field>
+            <field name="model">pos.risk.case</field>
+            <field name="arch" type="xml">
+                <graph string="Risk Cases Analysis" type="bar">
+                    <field name="category" type="row"/>
+                    <field name="risk_score" type="measure"/>
+                    <field name="financial_exposure" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
+        <record id="view_pos_risk_case_pivot" model="ir.ui.view">
+            <field name="name">pos.risk.case.pivot</field>
+            <field name="model">pos.risk.case</field>
+            <field name="arch" type="xml">
+                <pivot string="Risk Cases Analysis">
+                    <field name="cashier_id" type="row"/>
+                    <field name="category" type="col"/>
+                    <field name="risk_score" type="measure"/>
+                    <field name="anomaly_score" type="measure"/>
+                    <field name="financial_exposure" type="measure"/>
+                </pivot>
+            </field>
+        </record>
+
+        <record id="view_pos_risk_case_form" model="ir.ui.view">
+            <field name="name">pos.risk.case.form</field>
+            <field name="model">pos.risk.case</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_start_review" type="object" string="Start Review" class="btn-primary"
+                                invisible="state != 'new'"/>
+                        <button name="action_resolve" type="object" string="Resolve" class="btn-primary"
+                                invisible="state != 'under_review'"/>
+                        <button name="action_close" type="object" string="Close" invisible="state != 'resolved'"/>
+                        <button name="action_close_duplicate" type="object" string="Close as Duplicate"
+                                invisible="state != 'new' or review_outcome != 'duplicate'"/>
+                        <button name="action_reopen" type="object" string="Reopen" invisible="state != 'closed'"/>
+                        <field name="state" widget="statusbar" statusbar_visible="new,under_review,resolved,closed"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="fingerprint" readonly="1"/>
+                                <field name="detected_at"/>
+                                <field name="company_id"/>
+                                <field name="category"/>
+                                <field name="classification"/>
+                            </group>
+                            <group>
+                                <field name="order_id"/>
+                                <field name="order_line_id"/>
+                                <field name="cashier_id"/>
+                                <field name="config_id"/>
+                                <field name="session_id"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="risk_score"/>
+                                <field name="risk_level"/>
+                                <field name="rule_score"/>
+                                <field name="anomaly_score"/>
+                                <field name="impact_score"/>
+                            </group>
+                            <group>
+                                <field name="currency_id"/>
+                                <field name="financial_exposure"/>
+                                <field name="assigned_user_id"/>
+                                <field name="model_version"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Explanation">
+                                <field name="explanation"/>
+                                <field name="recommended_action"/>
+                            </page>
+                            <page string="Reasons">
+                                <field name="reason_ids">
+                                    <list editable="bottom">
+                                        <field name="sequence"/>
+                                        <field name="rule_id"/>
+                                        <field name="reason_code"/>
+                                        <field name="description"/>
+                                        <field name="observed_value"/>
+                                        <field name="expected_value"/>
+                                        <field name="deviation_value"/>
+                                        <field name="contribution_score"/>
+                                        <field name="financial_exposure"/>
+                                    </list>
+                                </field>
+                            </page>
+                            <page string="Review">
+                                <group>
+                                    <field name="review_outcome"/>
+                                    <field name="review_notes"/>
+                                    <field name="reviewed_by" readonly="1"/>
+                                    <field name="reviewed_at" readonly="1"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <chatter/>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_pos_risk_case" model="ir.actions.act_window">
+            <field name="name">Risk Cases</field>
+            <field name="res_model">pos.risk.case</field>
+            <field name="view_mode">kanban,list,form</field>
+            <field name="search_view_id" ref="view_pos_risk_case_search"/>
+        </record>
+        <record id="action_pos_risk_case_report" model="ir.actions.act_window">
+            <field name="name">Risk Reports</field>
+            <field name="res_model">pos.risk.case</field>
+            <field name="view_mode">graph,pivot,kanban,list,form</field>
+            <field name="search_view_id" ref="view_pos_risk_case_search"/>
+        </record>
+    </data>
+</odoo>
+
+

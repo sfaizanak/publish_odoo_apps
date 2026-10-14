@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_pos_risk_rule_list" model="ir.ui.view">
+            <field name="name">pos.risk.rule.list</field>
+            <field name="model">pos.risk.rule</field>
+            <field name="arch" type="xml">
+                <list>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="category"/>
+                    <field name="scope"/>
+                    <field name="threshold_value"/>
+                    <field name="severity_score"/>
+                    <field name="risk_weight"/>
+                    <field name="active"/>
+                </list>
+            </field>
+        </record>
+
+        <record id="view_pos_risk_rule_search" model="ir.ui.view">
+            <field name="name">pos.risk.rule.search</field>
+            <field name="model">pos.risk.rule</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="category"/>
+                    <filter name="active" string="Active" domain="[('active', '=', True)]"/>
+                    <filter name="inactive" string="Archived" domain="[('active', '=', False)]"/>
+                    <group>
+                        <filter name="category_group" string="Category" context="{'group_by': 'category'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <record id="view_pos_risk_rule_form" model="ir.ui.view">
+            <field name="name">pos.risk.rule.form</field>
+            <field name="model">pos.risk.rule</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="code"/>
+                                <field name="active"/>
+                                <field name="company_id"/>
+                                <field name="config_ids" widget="many2many_tags"/>
+                            </group>
+                            <group>
+                                <field name="category"/>
+                                <field name="scope"/>
+                                <field name="operator"/>
+                                <field name="threshold_value"/>
+                                <field name="secondary_threshold_value"/>
+                                <field name="window_minutes"/>
+                            </group>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="severity_score"/>
+                                <field name="risk_weight"/>
+                                <field name="minimum_amount"/>
+                                <field name="currency_id" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="case_classification"/>
+                                <field name="description"/>
+                                <field name="recommended_action"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_pos_risk_rule" model="ir.actions.act_window">
+            <field name="name">Risk Rules</field>
+            <field name="res_model">pos.risk.rule</field>
+            <field name="view_mode">list,form</field>
+            <field name="search_view_id" ref="view_pos_risk_rule_search"/>
+        </record>
+    </data>
+</odoo>
+
+

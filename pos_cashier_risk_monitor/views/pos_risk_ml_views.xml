@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_risk_ml_model_list" model="ir.ui.view">
+        <field name="name">pos.risk.ml.model.list</field>
+        <field name="model">pos.risk.ml.model</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="name"/>
+                <field name="company_id"/>
+                <field name="config_id"/>
+                <field name="state"/>
+                <field name="version"/>
+                <field name="sample_count"/>
+                <field name="trained_at"/>
+                <field name="error_message"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_pos_risk_ml_model_form" model="ir.ui.view">
+        <field name="name">pos.risk.ml.model.form</field>
+        <field name="model">pos.risk.ml.model</field>
+        <field name="arch" type="xml">
+            <form string="Isolation Forest Model">
+                <header>
+                    <button name="action_train" type="object" string="Train Model"
+                            class="btn-primary" groups="pos_cashier_risk_monitor.group_pos_risk_admin"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,trained,error"/>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="company_id"/>
+                        <field name="config_id"/>
+                        <field name="version"/>
+                        <field name="sample_count"/>
+                        <field name="trained_at"/>
+                    </group>
+                    <group>
+                        <field name="period_start"/>
+                        <field name="period_end"/>
+                        <field name="feature_schema"/>
+                        <field name="parameters"/>
+                        <field name="error_message"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_pos_risk_ml_model" model="ir.actions.act_window">
+        <field name="name">Isolation Forest Models</field>
+        <field name="res_model">pos.risk.ml.model</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

@@ -1,0 +1,37 @@
+# -*- coding: utf-8 -*-
+{
+    "name": "POS Cashier Risk Monitor",
+    "summary": "Detect cashier errors and fraud-risk patterns in POS transactions for manager review.",
+    "version": "19.0.2.0.0",
+    "category": "Point of Sale",
+    "author": "Shaikh Faizan",
+    "maintainers": ["Shaikh Faizan Abdul Kadar "],
+    "website": "https://sfaizanak.in/",
+    "license": "LGPL-3",
+    "depends": ["point_of_sale", "mail"],
+    "assets": {
+        "point_of_sale._assets_pos": [
+            "pos_cashier_risk_monitor/static/src/js/pos_event_tracker.js",
+        ],
+    },
+    "data": [
+        "security/security.xml",
+        "security/ir.model.access.csv",
+        "data/sequence_data.xml",
+        "data/risk_rule_data.xml",
+        "data/risk_cron_data.xml",
+        "views/pos_config_risk_views.xml",
+        "views/risk_rule_views.xml",
+        "views/pos_cashier_baseline_views.xml",
+        "views/pos_risk_ml_views.xml",
+        "views/pos_risk_evaluation_views.xml",
+        "views/risk_case_views.xml",
+        "views/res_config_settings_views.xml",
+        "views/pos_order_risk_views.xml",
+        "views/menu_views.xml",
+    ],
+    "demo": ["demo/demo_data.xml"],
+    "installable": True,
+    "application": False,
+    "auto_install": False,
+}

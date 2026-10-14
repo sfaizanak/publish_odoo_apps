@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_pos_cashier_baseline_list" model="ir.ui.view">
+        <field name="name">pos.cashier.baseline.list</field>
+        <field name="model">pos.cashier.baseline</field>
+        <field name="arch" type="xml">
+            <list string="Behavioural Baselines">
+                <field name="name"/>
+                <field name="baseline_level"/>
+                <field name="cashier_id"/>
+                <field name="config_id"/>
+                <field name="company_id"/>
+                <field name="sample_count"/>
+                <field name="avg_discount_pct"/>
+                <field name="p95_discount_pct"/>
+                <field name="avg_refund_amount"/>
+                <field name="calculated_at"/>
+            </list>
+        </field>
+    </record>
+    <record id="view_pos_cashier_baseline_form" model="ir.ui.view">
+        <field name="name">pos.cashier.baseline.form</field>
+        <field name="model">pos.cashier.baseline</field>
+        <field name="arch" type="xml">
+            <form string="Behavioural Baseline" create="false" edit="false">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="baseline_level"/>
+                        <field name="cashier_id"/>
+                        <field name="config_id"/>
+                        <field name="company_id"/>
+                        <field name="sample_count"/>
+                    </group>
+                    <group string="Period">
+                        <field name="period_start"/>
+                        <field name="period_end"/>
+                        <field name="calculated_at"/>
+                    </group>
+                    <group string="Statistics">
+                        <field name="avg_discount_pct"/>
+                        <field name="std_discount_pct"/>
+                        <field name="p95_discount_pct"/>
+                        <field name="avg_price_override_pct"/>
+                        <field name="std_price_override_pct"/>
+                        <field name="avg_deleted_lines"/>
+                        <field name="p95_deleted_lines"/>
+                        <field name="avg_refund_amount"/>
+                        <field name="p95_refund_amount"/>
+                        <field name="refund_frequency"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="action_pos_cashier_baseline" model="ir.actions.act_window">
+        <field name="name">Behavioural Baselines</field>
+        <field name="res_model">pos.cashier.baseline</field>
+        <field name="view_mode">list,form</field>
+    </record>
+</odoo>

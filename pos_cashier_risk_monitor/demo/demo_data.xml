@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="demo_evaluation_run" model="pos.risk.evaluation">
+        <field name="name">POS Risk Monitor Demo Evaluation</field>
+        <field name="notes">Link each scenario to a completed POS order during a demonstration, then click Evaluate Scenarios.</field>
+    </record>
+    <record id="demo_scenario_normal_sale" model="pos.risk.evaluation.scenario">
+        <field name="evaluation_id" ref="demo_evaluation_run"/><field name="sequence">10</field>
+        <field name="name">Normal sale</field><field name="code">NORMAL_SALE</field>
+        <field name="description">A regular sale at the configured price with no unusual event.</field>
+        <field name="category">normal</field><field name="expected_alert" eval="False"/><field name="expected_outcome">no_alert</field><field name="expected_level">none</field>
+    </record>
+    <record id="demo_scenario_excessive_discount" model="pos.risk.evaluation.scenario">
+        <field name="evaluation_id" ref="demo_evaluation_run"/><field name="sequence">20</field>
+        <field name="name">Excessive discount</field><field name="code">EXCESSIVE_DISCOUNT</field>
+        <field name="description">A discount exceeds the configured high-discount rule.</field>
+        <field name="category">discount</field><field name="expected_alert" eval="True"/><field name="expected_outcome">alert</field><field name="expected_level">high</field>
+    </record>
+    <record id="demo_scenario_price_decrease" model="pos.risk.evaluation.scenario">
+        <field name="evaluation_id" ref="demo_evaluation_run"/><field name="sequence">30</field>
+        <field name="name">Drastic price decrease</field><field name="code">DRASTIC_PRICE_DECREASE</field>
+        <field name="description">A cashier manually reduces a price beyond the configured tolerance.</field>
+        <field name="category">price_override</field><field name="expected_alert" eval="True"/><field name="expected_outcome">alert</field><field name="expected_level">high</field>
+    </record>
+    <record id="demo_scenario_below_cost" model="pos.risk.evaluation.scenario">
+        <field name="evaluation_id" ref="demo_evaluation_run"/><field name="sequence">40</field>
+        <field name="name">Below-cost sale</field><field name="code">BELOW_COST</field>
+        <field name="description">The final selling price is below product cost.</field>
+        <field name="category">price_override</field><field name="expected_alert" eval="True"/><field name="expected_outcome">alert</field><field name="expected_level">critical</field>
+    </record>
+    <record id="demo_scenario_deleted_value" model="pos.risk.evaluation.scenario">
+        <field name="evaluation_id" ref="demo_evaluation_run"/><field name="sequence">50</field>
+        <field name="name">High-value line deletion</field><field name="code">HIGH_VALUE_DELETION</field>
+        <field name="description">A high-value line is deleted after being added to the order.</field>
+        <field name="category">deletion</field><field name="expected_alert" eval="True"/><field name="expected_outcome">alert</field><field name="expected_level">high</field>
+    </record>
+    <record id="demo_scenario_linked_refund" model="pos.risk.evaluation.scenario">
+        <field name="evaluation_id" ref="demo_evaluation_run"/><field name="sequence">60</field>
+        <field name="name">Valid linked refund</field><field name="code">LINKED_REFUND</field>
+        <field name="description">A refund is linked to the original order and follows policy.</field>
+        <field name="category">refund</field><field name="expected_alert" eval="False"/><field name="expected_outcome">no_alert</field><field name="expected_level">none</field>
+    </record>
+    <record id="demo_scenario_unlinked_refund" model="pos.risk.evaluation.scenario">
+        <field name="evaluation_id" ref="demo_evaluation_run"/><field name="sequence">70</field>
+        <field name="name">Unlinked high-value refund</field><field name="code">UNLINKED_HIGH_REFUND</field>
+        <field name="description">A refund has no original POS order link and exceeds the configured amount.</field>
+        <field name="category">refund</field><field name="expected_alert" eval="True"/><field name="expected_outcome">alert</field><field name="expected_level">critical</field>
+    </record>
+    <record id="demo_scenario_repeated_refunds" model="pos.risk.evaluation.scenario">
+        <field name="evaluation_id" ref="demo_evaluation_run"/><field name="sequence">80</field>
+        <field name="name">Repeated refunds</field><field name="code">REPEATED_REFUNDS</field>
+        <field name="description">Several refunds are initiated by the same cashier inside the configured time window.</field>
+        <field name="category">refund</field><field name="expected_alert" eval="True"/><field name="expected_outcome">alert</field><field name="expected_level">high</field>
+    </record>
+    <record id="demo_scenario_cashier_anomaly" model="pos.risk.evaluation.scenario">
+        <field name="evaluation_id" ref="demo_evaluation_run"/><field name="sequence">90</field>
+        <field name="name">Unusual cashier behaviour</field><field name="code">CASHIER_ANOMALY</field>
+        <field name="description">The order is materially outside the cashier's established baseline.</field>
+        <field name="category">baseline</field><field name="expected_alert" eval="True"/><field name="expected_outcome">alert</field><field name="expected_level">medium</field>
+    </record>
+    <record id="demo_scenario_valid_exception" model="pos.risk.evaluation.scenario">
+        <field name="evaluation_id" ref="demo_evaluation_run"/><field name="sequence">100</field>
+        <field name="name">Valid authorised exception</field><field name="code">VALID_EXCEPTION</field>
+        <field name="description">A manager-approved exception is recorded and should be reviewed as valid business activity.</field>
+        <field name="category">exception</field><field name="expected_alert" eval="False"/><field name="expected_outcome">no_alert</field><field name="expected_level">none</field>
+    </record>
+</odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_pos_risk" model="ir.ui.view">
+        <field name="name">res.config.settings.view.pos.risk</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app string="POS Risk Monitor" name="pos_risk_monitor"
+                     groups="pos_cashier_risk_monitor.group_pos_risk_admin">
+                    <block title="Risk Scoring">
+                        <setting string="Case-Creation Threshold">
+                            <field name="pos_risk_case_creation_threshold"/>
+                        </setting>
+                        <setting string="High-Risk Threshold">
+                            <field name="pos_risk_high_threshold"/>
+                        </setting>
+                        <setting string="Critical-Risk Threshold">
+                            <field name="pos_risk_critical_threshold"/>
+                        </setting>
+                        <setting string="Rule Score Weight">
+                            <field name="pos_risk_rule_score_weight"/>
+                        </setting>
+                        <setting string="Anomaly Score Weight">
+                            <field name="pos_risk_anomaly_score_weight"/>
+                        </setting>
+                        <setting string="Impact Score Weight">
+                            <field name="pos_risk_impact_score_weight"/>
+                        </setting>
+                    </block>
+                    <block title="Baselines and Review">
+                        <setting string="Minimum Cashier Baseline Sample">
+                            <field name="pos_risk_baseline_min_sample"/>
+                        </setting>
+                        <setting string="Baseline Lookback Days">
+                            <field name="pos_risk_baseline_lookback_days"/>
+                        </setting>
+                        <setting string="Create Activity for High-Risk Case">
+                            <field name="pos_risk_create_activity_high"/>
+                        </setting>
+                        <setting string="Notify for Critical Cases">
+                            <field name="pos_risk_notify_critical"/>
+                        </setting>
+                        <setting string="POS Risk Managers">
+                            <field name="pos_risk_manager_ids" widget="many2many_tags"/>
+                        </setting>
+                        <setting string="Require Manual Price-Change Reason">
+                            <field name="pos_risk_require_price_change_reason"/>
+                        </setting>
+                    </block>
+                    <block title="Optional Machine Learning">
+                        <setting string="Enable Isolation Forest">
+                            <field name="pos_risk_ml_enabled"/>
+                        </setting>
+                        <setting string="ML Training Lookback Days">
+                            <field name="pos_risk_ml_lookback_days"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>
